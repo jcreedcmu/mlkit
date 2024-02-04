@@ -9,6 +9,7 @@ signature TIMER =
   sig
     type cpu_timer
     type real_timer
+    val checkGCTime: cpu_timer -> Time.time	
     val startCPUTimer  : unit -> cpu_timer
     val checkCPUTimer  : cpu_timer -> {usr : Time.time, sys : Time.time}
     val totalCPUTimer  : unit -> cpu_timer

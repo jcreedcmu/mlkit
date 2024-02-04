@@ -47,10 +47,10 @@ struct
       "[" ^ String.concatWith "," (map pp_effect effects) ^ "]"
     | pp_delta (Effect.Br (d1,d2)) = pp_delta d1 ^ " && " ^ pp_delta d2
 
-  exception AbortExp  (* Region inference of any expression is
+  exception AbortExpReg  (* Region inference of any expression is
                          enclosed in a handle which handles any
-                         exception - except AbortExp - (typically Crash.impossible)
-                         and converts it to AbortExp. Then AbortExp
+                         exception - except AbortExpReg - (typically Crash.impossible)
+                         and converts it to AbortExpReg. Then AbortExpReg
                          is propagated to the top-level call of
                          the region inference algorithm, which
                          calls Crash.impossible *)
@@ -691,7 +691,7 @@ struct
             (B, delta_emp)
            )
        ) (* case *)
-       handle AbortExp => raise AbortExp
+       handle AbortExpReg => raise AbortExpReg
             | _ =>
               (device "Region inference failed (function R)\n";
                device "Smallest enclosing expression:\n";
@@ -699,7 +699,7 @@ struct
                device "Region Static Environment:\n";
                PP.outputTree(device,RSE.layout rse,!Flags.colwidth);
                device "\n";
-               raise AbortExp
+               raise AbortExpReg
               )
 
       end (* let fun R_sw ...*)
@@ -707,7 +707,7 @@ struct
     fun loopR (B:cone,rse:rse,tr : (place,unit)Exp.trip) : cone =
         let val _ = gc_arrow_effect_update := false
             val _ = Effect.reset();
-            val B = #1(R (B,rse,tr)) handle AbortExp => Crash.impossible "R failed"
+            val B = #1(R (B,rse,tr)) handle AbortExpReg => Crash.impossible "R failed"
         in if !gc_arrow_effect_update then loopR (B,rse,tr)
            else B
         end

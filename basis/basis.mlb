@@ -227,8 +227,10 @@ local
           end
       in bas open Stream IOClose Imperative Unix end
       end
+
+    basis Socket = let open General in SOCKET.sig Socket.sml end
 in
   open General List ArrayVector String Bool Word Byte
        Int Real IntInf IntInfRep Io System Text Posix IO Socket PrimIO
-       WordArrayVector
+       WordArrayVector Socket
 end

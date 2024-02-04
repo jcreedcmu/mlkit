@@ -569,7 +569,7 @@ structure LambdaStatSem: LAMBDA_STAT_SEM =
       end
 
 
-   exception AbortExp
+   exception AbortExpLambda
 
     (* Type checking of primitives *)
     fun type_prim (env:env) (prim:Type prim) lexps : Type list =
@@ -968,10 +968,10 @@ structure LambdaStatSem: LAMBDA_STAT_SEM =
                      Frame {declared_lvars = map on_lvar declared_lvars,
                             declared_excons = map on_excon declared_excons}
                    end
-                 ) handle AbortExp => raise AbortExp
+                 ) handle AbortExpLambda => raise AbortExpLambda
                         | ? => (log_st (layoutLambdaExp lexp) ;
                                 log_st (layout_env env);
-                                raise AbortExp)
+                                raise AbortExpLambda)
 
   (* Analyse the datatype bindings and yield an environment which
    * maps all constructors to type schemes and all tynames to

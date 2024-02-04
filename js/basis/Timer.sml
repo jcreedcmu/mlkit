@@ -34,6 +34,13 @@ structure Timer : TIMER =
 	    }
 	end
 
+    fun checkGCTime {usr, sys, gc} = 
+	let val {gcSec, gcUsec, sysSec, sysUsec, usrSec, usrUsec} 
+	        = getrutime_ () 
+	    val gc  = fromSeconds gcSec  + fromMicroseconds gcUsec  - gc
+	in  gc
+	end
+
     fun startRealTimer () = now ();
 
     fun checkRealTimer time1 = now () - time1;

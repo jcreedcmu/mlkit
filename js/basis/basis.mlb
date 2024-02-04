@@ -122,7 +122,10 @@ local
        end
     basis Control =
        bas CONTROL.sig Control.sml end
+
+    basis Socket = let open General ArrayVector 
+       in bas SOCKET.sml Socket.sml end end
 in
   open General List ArrayVector String Bool Word Byte Text
-       Int Real IntInf IntInfRep System Io Control
+       Int Real IntInf IntInfRep System Io Control Socket
 end
