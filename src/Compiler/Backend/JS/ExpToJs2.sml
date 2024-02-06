@@ -556,7 +556,8 @@ fun pToJs1 name e : J.exp =
       | "__int_to_f64" => e
 
       | "__sqrt_f64" => callPrim1 "Math.sqrt" e
-      | _ => die ("pToJs1 unimplemented: " ^ name)
+      | "_terminate" => callPrim1 "SmlPrims.terminate" e
+      | _ => die ("ExpToJs2 pToJs1 unimplemented: " ^ name)
 
 fun pToJs0 name =
     case name

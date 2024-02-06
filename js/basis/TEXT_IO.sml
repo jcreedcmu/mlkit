@@ -24,6 +24,7 @@ signature TEXT_IO = sig
   (* Textual input *)
   type instream
   val openIn       : string -> instream
+  val openString   : string -> instream
   val closeIn      : instream -> unit
   val input        : instream -> vector
   val inputAll     : instream -> vector

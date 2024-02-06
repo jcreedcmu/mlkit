@@ -61,6 +61,7 @@ structure TextIO :> TEXT_IO where type elem = char and type vector = string
 
   fun unimpl s = raise (Fail ("TextIO." ^ s ^ ": unimplemented"))
   fun openIn _ = unimpl "openIn"
+  fun openString _ = unimpl "openString"
   fun closeIn _ = unimpl "closeIn"
   fun input _ = unimpl "input"
   fun inputAll _ = unimpl "inputAll"

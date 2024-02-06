@@ -549,7 +549,8 @@ fun pToJs1 name e =
       | "sml_localtime" => callPrim1 "SmlPrims.localtime" e
       | "sml_gmtime" => callPrim1 "SmlPrims.gmtime" e
       | "sml_mktime" => callPrim1 "SmlPrims.mktime" e
-      | _ => die ("pToJs1 unimplemented: " ^ name)
+      | "_terminate" => callPrim1 "SmlPrims.terminate" e
+      | _ => die ("ExpToJs pToJs1 unimplemented: " ^ name)
 
 fun pToJs0 name =
     case name
