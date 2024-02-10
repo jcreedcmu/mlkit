@@ -125,7 +125,11 @@ local
 
     basis Socket = let open General ArrayVector 
        in bas SOCKET.sml Socket.sml end end
+
+    basis SMLofNJ = let open General 
+       in bas SMLofNJ.sml end end
 in
   open General List ArrayVector String Bool Word Byte Text
-       Int Real IntInf IntInfRep System Io Control Socket
+       Int Real IntInf IntInfRep System Io Control
+       Socket SMLofNJ
 end
